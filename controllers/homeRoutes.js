@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Existing routes
+// Render dashboard with user posts
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -31,10 +31,12 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+// Render new post page
 router.get('/new-post', withAuth, (req, res) => {
   res.render('new-post', { logged_in: req.session.logged_in });
 });
 
+// Render edit post page
 router.get('/edit-post/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id);
